@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="hangMyApp">
+    <head>
+        <title>HangMyApp</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+
+        <style>
+            body {
+                padding: 20px 40px;
+                font-family: "Verdana";
+            }
+
+            h1 {
+                margin: 20px;
+            }
+
+            *{
+                text-align: center;
+                font-size: 50px;
+            }
+
+        </style>
+
+        <!-- load bootstrap and fontawesome via CDN -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        
+        <!-- load angular via CDN -->
+        <script src="//code.angularjs.org/1.3.0-rc.2/angular.min.js"></script>
+        <script src="//code.angularjs.org/1.3.0-rc.2/angular-route.min.js"></script>
+        <script src="//code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body ng-controller="gameController">
+        <h1>Hang Man</h1>
+        <span ng-repeat="char in displayChars() track by $index">
+    {{char}}
+</span>
+    </br>
+    </br>
+   
+<form ng-submit="checkGuess()">
+    <input autocomplete="off" type="text" name="guess" ng-model="guess"><button>Guess</button>
+</form>
+    </br>
+<div ng-pluralize count="guessCount" when="{'0': 'No guesses.', 'one': '1 guess.', 'other': '{} guesses.'}">
+    {{guessCount}}
+</div>
+<div ng-pluralize count="missCount" when="{'0': 'No misses.', 'one': '1 miss.', 'other': '{} misses.'}">
+    {{missCount}}
+</div>
+<span align="center" ng-repeat="character in guessedChars">
+    {{character}}
+</span>
+    <div ng-view></div>
+    </body>
+</html>
